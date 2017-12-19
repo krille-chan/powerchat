@@ -1,6 +1,6 @@
 # FoxyChat.js
 
-#### Easy to use json-only XMPP library based on [Strophe.js](/strophe.im).
+#### Easy to use xml-free javascript XMPP library based on [Strophe.js](/strophe.im).
 
 Foxychat.js is a simple to use XMPP library for webapps and messengers directly in the browser. With foxychat.js you are able to use the whole world of XMPP extensions without dealing with xml. Foxychat.js uses two functions, to convert xml to json and back. You only have to send and receive simple javascript objects.
 

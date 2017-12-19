@@ -6,7 +6,7 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
   <title>FoxyChat.js</title>
-  <meta name="description" content="Easy to use json-only XMPP library based on Strophe.js">
+  <meta name="description" content="Easy to use xml-free javascript XMPP library based on Strophe.js">
   <meta name="author" content="Christian Pauly">
 
   <!-- Mobile Specific Metas
@@ -22,374 +22,503 @@
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/skeleton.css">
   <link rel="stylesheet" href="css/fxos-icons-embedded.css">
-  <link rel="stylesheet" href="css/animate.css">
+  <link rel="stylesheet" href="css/custom.css">
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="icon" type="image/png" href="favicon.ico">
+
+  <!-- Javascript
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/json.human.js"></script>
+  <script src="../strophe.min.js"></script>
+  <script src="../foxychat.js"></script>
 
 </head>
 <body>
 
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <h1 id="foxychatjs">FoxyChat.js</h1>
+  <header class="animated fadeInDown">
+      <div class="left_side">
+          <nav>
+              <a class="logo" href="#">FoxyChat.js</a>
+              <a class="social_links" target="new"" href="https://github.com/ChristianPauly/FoxyChat.js"><img src="github.svg"></a>
+          </nav>
+      </div>
+      <div class="right_side mobile_nav">
+          <nav>
+              <a class="desktop_nav" href="#easytousejavascriptobjectonlyxmpplibrarybasedonstrophejsstropheim">Get started</a>
+              <a class="desktop_nav" href="#tryityourself">Try it yourself</a>
+              <a class="desktop_nav" href="#xmljsonconverter">XML - JSON Converter</a>
+              <a class="desktop_nav" href="#apidocumentation">API documentation</a>
 
-  <h4 id="easytousejsononlyxmpplibrarybasedonstrophejsstropheim">Easy to use json-only XMPP library based on <a href="/strophe.im">Strophe.js</a>.</h4>
+          </nav>
+      </div>
+        <a id="mobile_nav_button" class="social_links"><img src="navicon.svg"></a>
 
-  <p>Foxychat.js is a simple to use XMPP library for webapps and messengers directly in the browser. With foxychat.js you are able to use the whole world of XMPP extensions without dealing with xml. Foxychat.js uses two functions, to convert xml to json and back. You only have to send and receive simple javascript objects.</p>
+  </header>
 
-  <p>Foxychat.js can use bosh and websocket connections.</p>
+  <div class="container">
+      <h1 id="foxychatjs">FoxyChat.js</h1>
 
-  <h2 id="gettingstartedwithxmpp">Getting started with XMPP</h2>
+      <h4 id="easytousejavascriptobjectonlyxmpplibrarybasedonstrophejsstropheim">Easy to use xml-free javascript XMPP library based on <a href="/strophe.im">Strophe.js</a>.</h4>
 
-  <p>You first need a Jabber-ID from a XMPP server. This is mostly like get a email address. Your Jid looks like this:</p>
+      <p>Foxychat.js is a simple to use XMPP library for webapps and messengers directly in the browser. With foxychat.js you are able to use the whole world of XMPP extensions without dealing with xml. Foxychat.js uses two functions, to convert xml to json and back. You only have to send and receive simple javascript objects.</p>
 
-  <p>username@server.com</p>
+      <p>Foxychat.js can use bosh and websocket connections.</p>
 
-  <p>With your beloved web search engine you will find a lot of free XMPP server to use.
-  When you have a account you can sign in with your Jid and your password on every XMPP messenger out there. You could try
-   https://conversejs.org/ for example.</p>
+      <h2 id="gettingstartedwithxmpp">Getting started with XMPP</h2>
 
-  <h2 id="gettingstartedwithfoxychatjs">Getting started with FoxyChat.js</h2>
+      <p>You first need a Jabber-ID from a XMPP server. This is mostly like get a email address. Your Jid looks like this:</p>
 
-  <p>Include foxychat.js and the latest strophe.min.js: (Get strophe.min.js from <a href="https://github.com/strophe/strophejs">here</a>)</p>
+      <p>username@server.com</p>
 
-  <pre><code>&lt;script src='strophe.min.js'&gt;&lt;/script&gt;
-  &lt;script src='foxychat.js'&gt;&lt;/script&gt;
-  </code></pre>
+      <p>With your beloved web search engine you will find a lot of free XMPP server to use.
+      When you have a account you can sign in with your Jid and your password on every XMPP messenger out there. You could try
+       https://conversejs.org/ for example.</p>
 
-  <h5 id="example1setthecallbacksformessagesandpresences">Example 1: Set the callbacks for messages and presences</h5>
+      <h2 id="gettingstartedwithfoxychatjs">Getting started with FoxyChat.js</h2>
 
-  <pre><code>XMPP.OnMessage = function ( message ) {
-      alert ( "New Message from " + message.from + ": " + message.body_text );
-  }
+      <p>Include foxychat.js and the latest strophe.min.js: (Get strophe.min.js from <a href="https://github.com/strophe/strophejs">here</a>)</p>
 
-  XMPP.OnConnectionStatus = console.info;
+      <pre><code>&lt;script src='strophe.min.js'&gt;&lt;/script&gt;
+      &lt;script src='foxychat.js'&gt;&lt;/script&gt;
+      </code></pre>
 
-  XMPP.OnPresence = console.log;
-  </code></pre>
+      <h5 id="example1setthecallbacksformessagesandpresences">Example 1: Set the callbacks for messages and presences</h5>
 
-  <h5 id="example2connecttoyourserver">Example 2: Connect to your server:</h5>
+      <pre><code>XMPP.OnMessage = function ( message ) {
+          alert ( "New Message from " + message.from + ": " + message.body_text );
+      }
 
-  <p>You need to know the bosh or websocket address from your server.</p>
+      XMPP.OnConnectionStatus = console.info;
 
-  <pre><code>XMPP.connect ( {
-      connection: "wss://example.com/websocket",    // Your bosh / websocket connection
-      jid: "alice@example.com",
-      pass: "aliceLovesBob"
-  } );
+      XMPP.OnPresence = console.log;
+      </code></pre>
 
-  ////// Console output will be:
-  // 1 "CONNECTING"
-  // 5 "CONNECTED"
-  </code></pre>
+      <h5 id="example2connecttoyourserver">Example 2: Connect to your server:</h5>
 
-  <p>XMPP.OnConnectionStatus will be triggered multiple times. When you are connected, you will receive messages and presences from your buddys.</p>
+      <p>You need to know the bosh or websocket address from your server.</p>
 
-  <h5 id="example3sendmessage">Example 3: Send message</h5>
+      <pre><code>XMPP.connect ( {
+          connection: "wss://example.com/websocket",    // Your bosh / websocket connection
+          jid: "alice@example.com",
+          pass: "aliceLovesBob"
+      } );
 
-  <pre><code>XMPP.send ( {
-      to: "bob@example.com",
-      body_text: "Hello, whats up?"
-  } );
-  </code></pre>
+      ////// Console output will be:
+      // 1 "CONNECTING"
+      // 5 "CONNECTED"
+      </code></pre>
 
-  <h5 id="example4sendpresence">Example 4: Send presence</h5>
+      <p>XMPP.OnConnectionStatus will be triggered multiple times. When you are connected, you will receive messages and presences from your buddys.</p>
 
-  <pre><code>XMPP.sendPresence ( {
-      show_text: "xa"
-  } );
-  </code></pre>
+      <h5 id="example3sendmessage">Example 3: Send message</h5>
 
-  <p>With XMPP you can also manage a contact list called "roster". For this you should first add the namespace, described in the official <a href="https://xmpp.org/rfcs/rfc6121.html">XMPP documentation</a> and define two callback-functions.</p>
+      <pre><code>XMPP.send ( {
+          to: "bob@example.com",
+          body_text: "Hello, whats up?"
+      } );
+      </code></pre>
 
-  <h5 id="example5requestroster">Example 5: Request roster</h5>
+      <h5 id="example4sendpresence">Example 4: Send presence</h5>
 
-  <pre><code>Strophe.addNamespace('ROSTER', 'jabber:iq:roster');
+      <pre><code>XMPP.sendPresence ( {
+          show_text: "xa"
+      } );
+      </code></pre>
+
+      <p>With XMPP you can also manage a contact list called "roster". For this you should first add the namespace, described in the official <a href="https://xmpp.org/rfcs/rfc6121.html">XMPP documentation</a> and define two callback-functions.</p>
+
+      <h5 id="example5requestroster">Example 5: Request roster</h5>
+
+      <pre><code>Strophe.addNamespace('ROSTER', 'jabber:iq:roster');
+
+      success_callback = function ( roster ) {
+          alert ( "Roster received!" );
+          console.log ( roster );
+      };
+
+      error_callback = console.error;
+
+      XMPP.sendIQ ( { query_xmlns: Strophe.NS.ROSTER }, success_callback, error_callback );
+      </code></pre>
+
+      <p>The roster will also be simple json. The xml result would be:</p>
+
+      <pre><code>&lt;iq id='bv1bs71f'
+             to='alice@example.com'
+             type='result'&gt;
+          &lt;query xmlns='jabber:iq:roster' ver='ver7'&gt;
+            &lt;item jid='nurse@example.com'/&gt;
+            &lt;item jid='romeo@example.net'/&gt;
+          &lt;/query&gt;
+        &lt;/iq&gt;
+      </code></pre>
+
+      <p>But the result you will get in the success_callback function is simple this:</p>
+
+      <pre><code>{
+          id: 'bv1bs71f',
+          to: 'alice@example.com',
+          type: 'result',
+          query_xmlns: 'jabber:iq:roster',
+          query_ver: 'ver7',
+          query_items: [ { jid: 'nurse@example.com' }, { jid: 'romeo@example.net' } ],
+      }
+      </code></pre>
+
+      <p>You see that you have all informations from the basic XMPP stanza but it is allready converted into an javascript object.</p>
+
+      <h5 id="example6usesomexeps">Example 6: Use some XEP's</h5>
+
+      <p>It is now easy to use an XMPP extension, called XEP, without writing a plugin for the library. Just visit the Extension documentation from XMPP.org: <a href="https://xmpp.org/extensions/">https://xmpp.org/extensions/</a> and pick the XEP you want to use.</p>
+
+      <p>For example <a href="https://xmpp.org/extensions/xep-0085.html">XEP-0085: Chat State Notifications</a>:</p>
+
+      <pre><code>Strophe.addNamespace('CHATSTATE', 'http://jabber.org/protocol/chatstates');
+
+      XMPP.send ( {
+          to: "bob@example.com,
+          composing_xmlns: Strophe.NS.CHATSTATE
+      } );
+      </code></pre>
+
+      <h1 id="tryityourself">Try it yourself</h1>
+
+      <h2>Simple client</h2>
+      <form id='connectForm' action='javascript:void(0);'>
+          <input type="email" id="jid" placeholder="Jabber-ID">
+          <input type="password" id="pass" placeholder="Password">
+          <input type="text" id="service" placeholder="Bosh / WebSocket service">
+          <button>Connect</button>
+      </form>
+      <div id="jsonStream"></div>
+      <textarea id="jsonInput" placeholder="Input in javascript object (json) format"></textarea>
+      <button id="sendMessage">Send message</button>
+      <button id="sendPresence">Send presence</button>
+      <button id="sendIQ">Send IQ</button>
+      <button id="disconnect">Disconnect</button>
+
+      <script>
+        XMPP.OnInput = function ( msg ) {
+            $("#jsonStream").prepend(JsonHuman.format(msg));
+                $("#jsonStream").prepend("<h5>Incomming:</h5>");
+        };
+        XMPP.OnOutput = function ( msg ) {
+            $("#jsonStream").prepend(JsonHuman.format(msg));
+                $("#jsonStream").prepend("<h5>Outgoing:</h5>");
+        };
+
+        $("#connectForm").submit(function () {
+            var connection = {
+                jid: $("#jid").val(),
+                pass: $("#pass").val(),
+                connection: $("#service").val()
+            };
+            XMPP.connect ( connection );
+        });
+
+        $("#disconnect").click(XMPP.disconnect);
+        $("#sendMessage").click(function () {
+            try {
+                var str = $("#jsonInput").val()
+                var msg = JSON.parse(str);
+                XMPP.send ( msg );
+            }
+            catch( e ) {
+                alert ( e );
+            }
+
+        });
+        $("#sendIQ").click(function () {
+            try {
+                var str = $("#jsonInput").val()
+                var msg = JSON.parse(str);
+                XMPP.sendIQ ( msg );
+            }
+            catch( e ) {
+                alert ( e );
+            }
+
+        });
+        $("#sendPresence").click(function () {
+            try {
+                var str = $("#jsonInput").val()
+                var msg = JSON.parse(str);
+                XMPP.sendPresence ( msg );
+            }
+            catch( e ) {
+                alert ( e );
+            }
+
+        });
+      </script>
 
-  success_callback = function ( roster ) {
-      alert ( "Roster received!" );
-      console.log ( roster );
-  };
+      <h1 id="xmljsonconverter">XML - JSON Converter</h1>
+      <textarea id="xmlConverterInput" placeholder="Copy XML data here"></textarea>
+      <textarea id="jsonConverterInput" placeholder="Copy javascript object data here"></textarea>
+      <button id="stanzatojson">Convert XMPP data (XML) to javascript object (JSON)</button>
+      <button id="jsontostanza">Convert javascript object (JSON) to XMPP data (XML)</button>
 
-  error_callback = console.error;
+      <script>
+        $("#stanzatojson").click(function(){
+            try{
+                var stanzaStr = $("#xmlConverterInput").val();
+                var xml = $.parseXML(stanzaStr).firstChild;
+                var json = XMPP._stanzaToJson ( xml );
+                $("#jsonConverterInput").val ( JSON.stringify(json, null, "\t") );
+            }
+            catch( e ) {
+                alert ( e );
+            }
+        });
+        $("#jsontostanza").click(function(){
+            try{
+                var jsonStr = $("#jsonConverterInput").val();
+                var json = JSON.parse ( jsonStr );
+                var xml = XMPP._jsonToStanza ( json );
+                $("#xmlConverterInput").val ( xml.outerHTML );
+            }
+            catch( e ) {
+                alert ( e );
+            }
+        });
+      </script>
 
-  XMPP.sendIQ ( { query_xmlns: Strophe.NS.ROSTER }, success_callback, error_callback );
-  </code></pre>
+      <h1 id="apidocumentation">API documentation</h1>
 
-  <p>The roster will also be simple json. The xml result would be:</p>
+      <h2 id="methods">Methods</h2>
 
-  <pre><code>&lt;iq id='bv1bs71f'
-         to='alice@example.com'
-         type='result'&gt;
-      &lt;query xmlns='jabber:iq:roster' ver='ver7'&gt;
-        &lt;item jid='nurse@example.com'/&gt;
-        &lt;item jid='romeo@example.net'/&gt;
-      &lt;/query&gt;
-    &lt;/iq&gt;
-  </code></pre>
+      <h3 id="xmppconnectparametersobject">XMPP.connect ( parametersObject )</h3>
 
-  <p>But the result you will get in the success_callback function is simple this:</p>
+      <p>Will connect you to a server.
+      The transport-protocol for this connection will be chosen automatically based on the given service parameter.  URLs starting with “ws://” or “wss://” will use WebSockets, URLs starting with “http://”, “https://” or without a protocol will use BOSH.
+      To make Strophe connect to the current host you can leave out the protocol and host part and just pass the path.</p>
 
-  <pre><code>{
-      id: 'bv1bs71f',
-      to: 'alice@example.com',
-      type: 'result',
-      query_xmlns: 'jabber:iq:roster',
-      query_ver: 'ver7',
-      query_items: [ { jid: 'nurse@example.com' }, { jid: 'romeo@example.net' } ],
-  }
-  </code></pre>
+      <p>The cookies option allows you to pass in cookies to be added to the document.  These cookies will then be included in the BOSH XMLHttpRequest or in the websocket connection.</p>
 
-  <p>You see that you have all informations from the basic XMPP stanza but it is allready converted into an javascript object.</p>
+      <p>The passed in value must be a map of cookie names and string values.</p>
 
-  <h5 id="example6usesomexeps">Example 6: Use some XEP's</h5>
+      <p>As the connection process proceeds, the user supplied callback will be triggered multiple times with status updates.  The callback should take two arguments - the status code and the error condition.</p>
 
-  <p>It is now easy to use an XMPP extension, called XEP, without writing a plugin for the library. Just visit the Extension documentation from XMPP.org: <a href="https://xmpp.org/extensions/">https://xmpp.org/extensions/</a> and pick the XEP you want to use.</p>
+      <p>The status code will be one of the values in the Strophe.Status constants.  The error condition will be one of the conditions defined in RFC 3920 or the condition ‘strophe-parsererror’.</p>
 
-  <p>For example <a href="https://xmpp.org/extensions/xep-0085.html">XEP-0085: Chat State Notifications</a>:</p>
+      <p>The Parameters wait, hold and route are optional and only relevant for BOSH connections.  Please see XEP 124 for a mor detailed explanation of the optional parameters.</p>
 
-  <pre><code>Strophe.addNamespace('CHATSTATE', 'http://jabber.org/protocol/chatstates');
+      <h5 id="parameters">Parameters:</h5>
 
-  XMPP.send ( {
-      to: "bob@example.com,
-      composing_xmlns: Strophe.NS.CHATSTATE
-  } );
-  </code></pre>
+      <ul>
+      <li>parametersObject with following keys:</li>
 
-  <h1 id="tryityourself">Try it yourself</h1>
+      <li>(String) service:</li>
 
-  <p><a href="https://christianpauly.github.io/FoxyChat.js/">Visit the website to try it.</a></p>
+      <li>(String) jid:    The user’s JID.  This may be a bare JID, or a full JID.  If a node is not supplied, SASL OAUTHBEARER or SASL ANONYMOUS authentication will be attempted (OAUTHBEARER will process the provided password value as an access token).</li>
 
-  <h1 id="apidocumentation">API documentation</h1>
+      <li>(String) pass:    The user’s password.</li>
 
-  <h2 id="methods">Methods</h2>
+      <li>(Function) callback:    The connect callback function.</li>
 
-  <h3 id="xmppconnectparametersobject">XMPP.connect ( parametersObject )</h3>
+      <li>(Integer) wait:    The optional HTTPBIND wait value.  This is the time the server will wait befor returning an empty result for a request.  The default setting of 60 seconds is recommended.</li>
 
-  <p>Will connect you to a server.
-  The transport-protocol for this connection will be chosen automatically based on the given service parameter.  URLs starting with “ws://” or “wss://” will use WebSockets, URLs starting with “http://”, “https://” or without a protocol will use BOSH.
-  To make Strophe connect to the current host you can leave out the protocol and host part and just pass the path.</p>
+      <li>(Integer) hold:    The optional HTTPBIND hold value.  This is the number of connections the server will hold at one time.  This should almost always be set to 1 (the default).</li>
 
-  <p>The cookies option allows you to pass in cookies to be added to the document.  These cookies will then be included in the BOSH XMLHttpRequest or in the websocket connection.</p>
+      <li>(String) route:    The optional route value.</li>
 
-  <p>The passed in value must be a map of cookie names and string values.</p>
+      <li>(String) authcid:    The optional alternative authentication identity (username) if intending to impersonate another user.  When using the SASL-EXTERNAL authentication mechanism, for example with client certificates, then the authcid value is used to determine whether an authorization JID (authzid) should be sent to the server.  The authzid should not be sent to the server if the authzid and authcid are the same.  So to prevent it from being sent (for example when the JID is already contained in the client certificate), set authcid to that same JID.  See XEP-178 for mor details.</li>
+      </ul>
 
-  <p>As the connection process proceeds, the user supplied callback will be triggered multiple times with status updates.  The callback should take two arguments - the status code and the error condition.</p>
+      <h3 id="xmppdisconnect">XMPP.disconnect ()</h3>
 
-  <p>The status code will be one of the values in the Strophe.Status constants.  The error condition will be one of the conditions defined in RFC 3920 or the condition ‘strophe-parsererror’.</p>
+      <p>Will disconnect you from the server.</p>
 
-  <p>The Parameters wait, hold and route are optional and only relevant for BOSH connections.  Please see XEP 124 for a mor detailed explanation of the optional parameters.</p>
+      <h3 id="xmppsendmessageobject">XMPP.send ( messageObject )</h3>
 
-  <h5 id="parameters">Parameters:</h5>
+      <p>Will send a message. You need at least two ###### Parameters:</p>
 
-  <ul>
-  <li>parametersObject with following keys:</li>
+      <h4 id="parameters-1">Parameters:</h4>
 
-  <li>(String) service:</li>
+      <ul>
+      <li>messageObject.to: Who receives the message</li>
 
-  <li>(String) jid:    The user’s JID.  This may be a bare JID, or a full JID.  If a node is not supplied, SASL OAUTHBEARER or SASL ANONYMOUS authentication will be attempted (OAUTHBEARER will process the provided password value as an access token).</li>
+      <li>messageObject.body_text: The message text</li>
+      </ul>
 
-  <li>(String) pass:    The user’s password.</li>
+      <h3 id="xmppsendpresencepresenceobject">XMPP.sendPresence ( presenceObject )</h3>
 
-  <li>(Function) callback:    The connect callback function.</li>
+      <p>Will send a presence. All parameters are optional. To send an certain presence, set show_text.</p>
 
-  <li>(Integer) wait:    The optional HTTPBIND wait value.  This is the time the server will wait befor returning an empty result for a request.  The default setting of 60 seconds is recommended.</li>
+      <h3 id="xmppsendiqiqsuccess_callbackerror_callbacktimeout">XMPP.sendIQ ( iq, success<em>callback, error</em>callback, timeout )</h3>
 
-  <li>(Integer) hold:    The optional HTTPBIND hold value.  This is the number of connections the server will hold at one time.  This should almost always be set to 1 (the default).</li>
+      <p>Will send a query to a server.</p>
 
-  <li>(String) route:    The optional route value.</li>
+      <h4 id="parameters-2">Parameters:</h4>
 
-  <li>(String) authcid:    The optional alternative authentication identity (username) if intending to impersonate another user.  When using the SASL-EXTERNAL authentication mechanism, for example with client certificates, then the authcid value is used to determine whether an authorization JID (authzid) should be sent to the server.  The authzid should not be sent to the server if the authzid and authcid are the same.  So to prevent it from being sent (for example when the JID is already contained in the client certificate), set authcid to that same JID.  See XEP-178 for mor details.</li>
-  </ul>
+      <ul>
+      <li>(object) iq: A javascript object as a query.</li>
 
-  <h3 id="xmppdisconnect">XMPP.disconnect ()</h3>
+      <li>(function) success_callback: Will be triggered, when the server answers to the query. It returns a javascript object with the answer.</li>
 
-  <p>Will disconnect you from the server.</p>
+      <li>(function) error_callback: Will be triggered, when the server answers with an error. It returns a javascript object with the error.</li>
 
-  <h3 id="xmppsendmessageobject">XMPP.send ( messageObject )</h3>
+      <li>(int) timeout: The time for timeout. By default this is the value in XMPP.timeout, initialized with 5000.</li>
+      </ul>
 
-  <p>Will send a message. You need at least two ###### Parameters:</p>
+      <h3 id="xmppsetdebugdebugon">XMPP.setDebug ( debugOn )</h3>
 
-  <h4 id="parameters-1">Parameters:</h4>
+      <p>Sets the debug messages in the console on or off.</p>
 
-  <ul>
-  <li>messageObject.to: Who receives the message</li>
+      <h4 id="parameters-3">Parameters:</h4>
 
-  <li>messageObject.body_text: The message text</li>
-  </ul>
+      <ul>
+      <li>(boolean) debugOn</li>
+      </ul>
 
-  <h3 id="xmppsendpresencepresenceobject">XMPP.sendPresence ( presenceObject )</h3>
+      <h3 id="xmppgetsubnodemessageobjectsubnodename">XMPP.getSubNode ( messageObject, subNodeName )</h3>
 
-  <p>Will send a presence. All parameters are optional. To send an certain presence, set show_text.</p>
+      <p>A useful function to get a subnode. For example to transform:</p>
 
-  <h3 id="xmppsendiqiqsuccess_callbackerror_callbacktimeout">XMPP.sendIQ ( iq, success<em>callback, error</em>callback, timeout )</h3>
+      <pre><code>XMPP.getSubNode( {
+          carbon_forwarded_message_body_text: "...",
+          carbon_forwarded_message_from: "..."
+      },  "message");
 
-  <p>Will send a query to a server.</p>
+      // output:
+      // {
+      //  body_text: "...",
+      //  from: "..."
+      // }
+      </code></pre>
 
-  <h4 id="parameters-2">Parameters:</h4>
+      <h2 id="usefulvariables">Useful variables</h2>
 
-  <ul>
-  <li>(object) iq: A javascript object as a query.</li>
+      <h3 id="xmpptimeout">XMPP.timeout</h3>
 
-  <li>(function) success_callback: Will be triggered, when the server answers to the query. It returns a javascript object with the answer.</li>
+      <p>Is the default timeout for IQ's.</p>
 
-  <li>(function) error_callback: Will be triggered, when the server answers with an error. It returns a javascript object with the error.</li>
+      <h3 id="xmppconn">XMPP.conn</h3>
 
-  <li>(int) timeout: The time for timeout. By default this is the value in XMPP.timeout, initialized with 5000.</li>
-  </ul>
+      <p>If you are familiar with Strophe.js you could find this useful. It is the link to a full Strophe connection. You are free to use
+      certain Strophe.js plugins from here.</p>
 
-  <h3 id="xmppsetdebugdebugon">XMPP.setDebug ( debugOn )</h3>
+      <h3 id="xmppstatus">XMPP.status</h3>
 
-  <p>Sets the debug messages in the console on or off.</p>
+      <p>Is the currenct status of your connection to the server. Each status has a number:</p>
 
-  <h4 id="parameters-3">Parameters:</h4>
+      <ol>
+      <li>"ERROR"</li>
 
-  <ul>
-  <li>(boolean) debugOn</li>
-  </ul>
+      <li>"CONNECTING"</li>
 
-  <h3 id="xmppgetsubnodemessageobjectsubnodename">XMPP.getSubNode ( messageObject, subNodeName )</h3>
+      <li>"CONNFAIL"</li>
 
-  <p>A useful function to get a subnode. For example to transform:</p>
+      <li>"AUTHENTICATING"</li>
 
-  <pre><code>XMPP.getSubNode( {
-      carbon_forwarded_message_body_text: "...",
-      carbon_forwarded_message_from: "..."
-  },  "message");
+      <li>"AUTHFAIL"</li>
 
-  // output:
-  // {
-  //  body_text: "...",
-  //  from: "..."
-  // }
-  </code></pre>
+      <li>"CONNECTED"</li>
 
-  <h2 id="usefulvariables">Useful variables</h2>
+      <li>"DISCONNECTED"</li>
 
-  <h3 id="xmpptimeout">XMPP.timeout</h3>
+      <li>"DISCONNECTING"</li>
 
-  <p>Is the default timeout for IQ's.</p>
+      <li>"ATTACHED"</li>
 
-  <h3 id="xmppconn">XMPP.conn</h3>
+      <li>"REDIRECT"</li>
 
-  <p>If you are familiar with Strophe.js you could find this useful. It is the link to a full Strophe connection. You are free to use
-  certain Strophe.js plugins from here.</p>
+      <li>"CONNTIMEOUT"</li>
 
-  <h3 id="xmppstatus">XMPP.status</h3>
+      <li>"REGIFAIL"</li>
 
-  <p>Is the currenct status of your connection to the server. Each status has a number:</p>
+      <li>"REGISTER"</li>
 
-  <ol>
-  <li>"ERROR"</li>
+      <li>"REGISTERED"</li>
 
-  <li>"CONNECTING"</li>
+      <li>"CONFLICT"</li>
 
-  <li>"CONNFAIL"</li>
+      <li>"NOTACCEPTABLE"</li>
+      </ol>
 
-  <li>"AUTHENTICATING"</li>
+      <h2 id="useroverrideablefunctions">User overrideable functions</h2>
 
-  <li>"AUTHFAIL"</li>
+      <h3 id="xmpponconnectionstatus">XMPP.OnConnectionStatus</h3>
 
-  <li>"CONNECTED"</li>
+      <p>Will be triggered when the connection status is changing.</p>
 
-  <li>"DISCONNECTED"</li>
+      <h4 id="parameters-4">Parameters:</h4>
 
-  <li>"DISCONNECTING"</li>
+      <ul>
+      <li>StatusID: Is a number from 0 to 15 and related to the status</li>
 
-  <li>"ATTACHED"</li>
+      <li>Status: A readable string</li>
+      </ul>
 
-  <li>"REDIRECT"</li>
+      <h3 id="xmpponconnected">XMPP.OnConnected</h3>
 
-  <li>"CONNTIMEOUT"</li>
+      <p>Will be triggered when you are connected.</p>
 
-  <li>"REGIFAIL"</li>
+      <h3 id="xmppondisconnected">XMPP.OnDisconnected</h3>
 
-  <li>"REGISTER"</li>
+      <p>Will be triggered when you are disconnected.</p>
 
-  <li>"REGISTERED"</li>
+      <h3 id="xmpponmessage">XMPP.OnMessage</h3>
 
-  <li>"CONFLICT"</li>
+      <p>Will be triggered when you receive a message.</p>
 
-  <li>"NOTACCEPTABLE"</li>
-  </ol>
+      <h4 id="parameters-5">Parameters:</h4>
 
-  <h2 id="useroverrideablefunctions">User overrideable functions</h2>
+      <ul>
+      <li>object.from: Who sent the message</li>
 
-  <h3 id="xmpponconnectionstatus">XMPP.OnConnectionStatus</h3>
+      <li>object.type: Mostly "chat" or "groupchat"</li>
 
-  <p>Will be triggered when the connection status is changing.</p>
+      <li>object.to: Who receives the message</li>
 
-  <h4 id="parameters-4">Parameters:</h4>
+      <li>object.body_text: The message text</li>
 
-  <ul>
-  <li>StatusID: Is a number from 0 to 15 and related to the status</li>
+      <li>object...</li>
+      </ul>
 
-  <li>Status: A readable string</li>
-  </ul>
+      <h3 id="xmpponpresence">XMPP.OnPresence</h3>
 
-  <h3 id="xmpponconnected">XMPP.OnConnected</h3>
+      <p>Will be triggered when you receive a presence.</p>
 
-  <p>Will be triggered when you are connected.</p>
+      <h4 id="parameters-6">Parameters:</h4>
 
-  <h3 id="xmppondisconnected">XMPP.OnDisconnected</h3>
+      <ul>
+      <li>object.from: Who sent the message</li>
 
-  <p>Will be triggered when you are disconnected.</p>
+      <li>object.show: Will be null or object.show_text will have the presence</li>
 
-  <h3 id="xmpponmessage">XMPP.OnMessage</h3>
+      <li>object...</li>
+      </ul>
 
-  <p>Will be triggered when you receive a message.</p>
+      <h3 id="xmpponinput">XMPP.OnInput</h3>
 
-  <h4 id="parameters-5">Parameters:</h4>
+      <p>Will be triggered when you receive something.</p>
 
-  <ul>
-  <li>object.from: Who sent the message</li>
+      <h4 id="parameters-7">Parameters:</h4>
 
-  <li>object.type: Mostly "chat" or "groupchat"</li>
+      <ul>
+      <li>inputObject: The XML input converted into a javascript object.</li>
+      </ul>
 
-  <li>object.to: Who receives the message</li>
+      <h3 id="xmpponoutput">XMPP.OnOutput</h3>
 
-  <li>object.body_text: The message text</li>
+      <p>Will be triggered when you send something.</p>
 
-  <li>object...</li>
-  </ul>
+      <h4 id="parameters-8">Parameters:</h4>
 
-  <h3 id="xmpponpresence">XMPP.OnPresence</h3>
-
-  <p>Will be triggered when you receive a presence.</p>
-
-  <h4 id="parameters-6">Parameters:</h4>
-
-  <ul>
-  <li>object.from: Who sent the message</li>
-
-  <li>object.show: Will be null or object.show_text will have the presence</li>
-
-  <li>object...</li>
-  </ul>
-
-  <h3 id="xmpponinput">XMPP.OnInput</h3>
-
-  <p>Will be triggered when you receive something.</p>
-
-  <h4 id="parameters-7">Parameters:</h4>
-
-  <ul>
-  <li>inputObject: The XML input converted into a javascript object.</li>
-  </ul>
-
-  <h3 id="xmpponoutput">XMPP.OnOutput</h3>
-
-  <p>Will be triggered when you send something.</p>
-
-  <h4 id="parameters-8">Parameters:</h4>
-
-  <ul>
-  <li>outputObject: The XML input converted into a javascript object.</li>
-  </ul>
+      <ul>
+      <li>outputObject: The XML input converted into a javascript object.</li>
+      </ul>
+  </div>
 
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+  <script src="js/nav.js"></script>
 </body>
 </html>

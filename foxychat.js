@@ -145,8 +145,6 @@ XMPP = {
 			Strophe.warn = null;
 			Strophe.error = null;
 			Strophe.fatal = null;
-			XMPP.conn.xmlInput = null;
-			XMPP.conn.xmlOutput = null;
 		}
 	},
 
