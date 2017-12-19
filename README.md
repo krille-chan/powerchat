@@ -1,10 +1,10 @@
-# FoxyChat.js
+# POWERCHAT_!
 
 #### Easy to use xml-free javascript XMPP library based on [Strophe.js](/strophe.im).
 
-Foxychat.js is a simple to use XMPP library for webapps and messengers directly in the browser. With foxychat.js you are able to use the whole world of XMPP extensions without dealing with xml. Foxychat.js uses two functions, to convert xml to json and back. You only have to send and receive simple javascript objects.
+POWERCHAT_! is a simple to use XMPP library for webapps and messengers directly in the browser. With POWERCHAT_! you are able to use the whole world of XMPP extensions without dealing with xml. POWERCHAT_! uses two functions, to convert xml to json and back. You only have to send and receive simple javascript objects.
 
-Foxychat.js can use bosh and websocket connections.
+POWERCHAT_! can use bosh and websocket connections.
 
 ## Getting started with XMPP
 
@@ -16,13 +16,13 @@ With your beloved web search engine you will find a lot of free XMPP server to u
 When you have a account you can sign in with your Jid and your password on every XMPP messenger out there. You could try
  https://conversejs.org/ for example.
 
-## Getting started with FoxyChat.js
+## Getting started with POWERCHAT_!
 
-Include foxychat.js and the latest strophe.min.js: \(Get strophe.min.js from [here](https://github.com/strophe/strophejs)\)
+Include POWERCHAT_! and the latest strophe.min.js: \(Get strophe.min.js from [here](https://github.com/strophe/strophejs)\)
 
 ```
 <script src='strophe.min.js'></script>
-<script src='foxychat.js'></script>
+<script src='POWERCHAT_!'></script>
 ```
 
 ##### Example 1: Set the callbacks for messages and presences
@@ -133,7 +133,7 @@ XMPP.send ( {
 
 # Try it yourself
 
-[Visit the website to try it.](https://christianpauly.github.io/FoxyChat.js/)
+[Visit the website to try it.](https://christianpauly.github.io/POWERCHAT_!/)
 
 # API documentation
 
