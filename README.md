@@ -39,6 +39,7 @@ XMPP.OnPresence = console.log;
 
 ##### Example 2: Connect to your server:
 
+You need to know the bosh ore websocket address from your server.
 ```
 XMPP.connect ( {
     connection: "wss://example.com/websocket",    // Your bosh / websocket connection
@@ -130,11 +131,11 @@ XMPP.send ( {
 } );
 ```
 
-## API documentation
+# API documentation
 
-### Methods
+## Methods
 
-##### XMPP.connect ( parametersObject )
+### XMPP.connect ( parametersObject )
 
 Will connect you to a server.
 The transport-protocol for this connection will be chosen automatically based on the given service parameter.  URLs starting with “ws://” or “wss://” will use WebSockets, URLs starting with “http://”, “https://” or without a protocol will use BOSH.
@@ -150,52 +151,52 @@ The status code will be one of the values in the Strophe.Status constants.  The 
 
 The Parameters wait, hold and route are optional and only relevant for BOSH connections.  Please see XEP 124 for a more detailed explanation of the optional parameters.
 
-Parameters:
+##### Parameters:
 * parametersObject with following keys:
-** (String) service:
-** (String) jid:	The user’s JID.  This may be a bare JID, or a full JID.  If a node is not supplied, SASL OAUTHBEARER or SASL ANONYMOUS authentication will be attempted (OAUTHBEARER will process the provided password value as an access token).
-** (String) pass:	The user’s password.
-** (Function) callback:	The connect callback function.
-** (Integer) wait:	The optional HTTPBIND wait value.  This is the time the server will wait before returning an empty result for a request.  The default setting of 60 seconds is recommended.
-** (Integer) hold:	The optional HTTPBIND hold value.  This is the number of connections the server will hold at one time.  This should almost always be set to 1 (the default).
-** (String) route:	The optional route value.
-** (String) authcid:	The optional alternative authentication identity (username) if intending to impersonate another user.  When using the SASL-EXTERNAL authentication mechanism, for example with client certificates, then the authcid value is used to determine whether an authorization JID (authzid) should be sent to the server.  The authzid should not be sent to the server if the authzid and authcid are the same.  So to prevent it from being sent (for example when the JID is already contained in the client certificate), set authcid to that same JID.  See XEP-178 for more details.
+* (String) service:
+* (String) jid:	The user’s JID.  This may be a bare JID, or a full JID.  If a node is not supplied, SASL OAUTHBEARER or SASL ANONYMOUS authentication will be attempted (OAUTHBEARER will process the provided password value as an access token).
+* (String) pass:	The user’s password.
+* (Function) callback:	The connect callback function.
+* (Integer) wait:	The optional HTTPBIND wait value.  This is the time the server will wait before returning an empty result for a request.  The default setting of 60 seconds is recommended.
+* (Integer) hold:	The optional HTTPBIND hold value.  This is the number of connections the server will hold at one time.  This should almost always be set to 1 (the default).
+* (String) route:	The optional route value.
+* (String) authcid:	The optional alternative authentication identity (username) if intending to impersonate another user.  When using the SASL-EXTERNAL authentication mechanism, for example with client certificates, then the authcid value is used to determine whether an authorization JID (authzid) should be sent to the server.  The authzid should not be sent to the server if the authzid and authcid are the same.  So to prevent it from being sent (for example when the JID is already contained in the client certificate), set authcid to that same JID.  See XEP-178 for more details.
 
 
-##### XMPP.disconnect ()
+### XMPP.disconnect ()
 
 Will disconnect you from the server.
 
-##### XMPP.send ( messageObject )
+### XMPP.send ( messageObject )
 
-Will send a message. You need at least two parameters:
+Will send a message. You need at least two ###### Parameters:
 
-Parameters:
+#### Parameters:
 * messageObject.to: Who receives the message
 * messageObject.body_text: The message text
 
-##### XMPP.sendPresence ( presenceObject )
+### XMPP.sendPresence ( presenceObject )
 
 Will send a presence. All parameters are optional. To send an certain presence, set show_text.
 
-##### XMPP.sendIQ ( iq, success_callback, error_callback, timeout )
+### XMPP.sendIQ ( iq, success_callback, error_callback, timeout )
 
 Will send a query to a server.
 
-Parameters:
+#### Parameters:
 * (object) iq: A javascript object as a query.
 * (function) success_callback: Will be triggered, when the server answers to the query. It returns a javascript object with the answer.
 * (function) error_callback: Will be triggered, when the server answers with an error. It returns a javascript object with the error.
 * (int) timeout: The time for timeout. By default this is the value in XMPP.timeout, initialized with 5000.
 
-##### XMPP.setDebug ( debugOn )
+### XMPP.setDebug ( debugOn )
 
 Sets the debug messages in the console on or off.
 
-Parameters:
+#### Parameters:
 * (boolean) debugOn
 
-##### XMPP.getSubNode ( messageObject, subNodeName )
+### XMPP.getSubNode ( messageObject, subNodeName )
 
 A useful function to get a subnode. For example to transform:
 
@@ -212,18 +213,18 @@ XMPP.getSubNode( {
 // }
 ```
 
-### Useful variables
+## Useful variables
 
-##### XMPP.timeout
+### XMPP.timeout
 
 Is the default timeout for IQ's.
 
-##### XMPP.conn
+### XMPP.conn
 
 If you are familiar with Strophe.js you could find this useful. It is the link to a full Strophe connection. You are free to use
 certain Strophe.js plugins from here.
 
-##### XMPP.status
+### XMPP.status
 
 Is the currenct status of your connection to the server. Each status has a number:
 
@@ -245,30 +246,30 @@ Is the currenct status of your connection to the server. Each status has a numbe
 15. "NOTACCEPTABLE"
 
 
-### User overrideable functions
+## User overrideable functions
 
-##### XMPP.OnConnectionStatus
+### XMPP.OnConnectionStatus
 
 Will be triggered when the connection status is changing.
 
-Parameters:
+#### Parameters:
 
 * StatusID: Is a number from 0 to 15 and related to the status
 * Status: A readable string
 
-##### XMPP.OnConnected
+### XMPP.OnConnected
 
 Will be triggered when you are connected.
 
-##### XMPP.OnDisconnected
+### XMPP.OnDisconnected
 
 Will be triggered when you are disconnected.
 
-##### XMPP.OnMessage
+### XMPP.OnMessage
 
 Will be triggered when you receive a message.
 
-Parameters:
+#### Parameters:
 
 * object.from: Who sent the message
 * object.type: Mostly "chat" ore "groupchat"
@@ -276,26 +277,26 @@ Parameters:
 * object.body_text: The message text
 * object...
 
-##### XMPP.OnPresence
+### XMPP.OnPresence
 
 Will be triggered when you receive a presence.
 
-Parameters:
+#### Parameters:
 
 * object.from: Who sent the message
 * object.show: Will be null or object.show_text will have the presence
 * object...
 
-##### XMPP.OnInput
+### XMPP.OnInput
 
 Will be triggered when you receive something.
 
-Parameters:
+#### Parameters:
 * inputObject: The XML input converted into a javascript object.
 
-##### XMPP.OnOutput
+### XMPP.OnOutput
 
 Will be triggered when you send something.
 
-Parameters:
+#### Parameters:
 * outputObject: The XML input converted into a javascript object.
