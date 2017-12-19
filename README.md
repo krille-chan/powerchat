@@ -133,7 +133,7 @@ XMPP.send ( {
 
 # Try it yourself
 
-[Visit the website to try it.](https://christianpauly.github.io/POWERCHAT_!/)
+[Visit the website to try it.](https://christianpauly.github.io/powerchat/)
 
 # API documentation
 
