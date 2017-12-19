@@ -1,4 +1,4 @@
-# foxychat.js
+# FoxyChat.js
 
 #### Easy to use json-only XMPP library based on [Strophe.js](/strophe.im).
 
@@ -39,7 +39,7 @@ XMPP.OnPresence = console.log;
 
 ##### Example 2: Connect to your server:
 
-You need to know the bosh ore websocket address from your server.
+You need to know the bosh or websocket address from your server.
 ```
 XMPP.connect ( {
     connection: "wss://example.com/websocket",    // Your bosh / websocket connection
@@ -131,6 +131,10 @@ XMPP.send ( {
 } );
 ```
 
+# Try it yourself
+
+[Visit the website to try it.](https://christianpauly.github.io/FoxyChat.js/)
+
 # API documentation
 
 ## Methods
@@ -149,7 +153,7 @@ As the connection process proceeds, the user supplied callback will be triggered
 
 The status code will be one of the values in the Strophe.Status constants.  The error condition will be one of the conditions defined in RFC 3920 or the condition ‘strophe-parsererror’.
 
-The Parameters wait, hold and route are optional and only relevant for BOSH connections.  Please see XEP 124 for a more detailed explanation of the optional parameters.
+The Parameters wait, hold and route are optional and only relevant for BOSH connections.  Please see XEP 124 for a mor detailed explanation of the optional parameters.
 
 ##### Parameters:
 * parametersObject with following keys:
@@ -157,10 +161,10 @@ The Parameters wait, hold and route are optional and only relevant for BOSH conn
 * (String) jid:	The user’s JID.  This may be a bare JID, or a full JID.  If a node is not supplied, SASL OAUTHBEARER or SASL ANONYMOUS authentication will be attempted (OAUTHBEARER will process the provided password value as an access token).
 * (String) pass:	The user’s password.
 * (Function) callback:	The connect callback function.
-* (Integer) wait:	The optional HTTPBIND wait value.  This is the time the server will wait before returning an empty result for a request.  The default setting of 60 seconds is recommended.
+* (Integer) wait:	The optional HTTPBIND wait value.  This is the time the server will wait befor returning an empty result for a request.  The default setting of 60 seconds is recommended.
 * (Integer) hold:	The optional HTTPBIND hold value.  This is the number of connections the server will hold at one time.  This should almost always be set to 1 (the default).
 * (String) route:	The optional route value.
-* (String) authcid:	The optional alternative authentication identity (username) if intending to impersonate another user.  When using the SASL-EXTERNAL authentication mechanism, for example with client certificates, then the authcid value is used to determine whether an authorization JID (authzid) should be sent to the server.  The authzid should not be sent to the server if the authzid and authcid are the same.  So to prevent it from being sent (for example when the JID is already contained in the client certificate), set authcid to that same JID.  See XEP-178 for more details.
+* (String) authcid:	The optional alternative authentication identity (username) if intending to impersonate another user.  When using the SASL-EXTERNAL authentication mechanism, for example with client certificates, then the authcid value is used to determine whether an authorization JID (authzid) should be sent to the server.  The authzid should not be sent to the server if the authzid and authcid are the same.  So to prevent it from being sent (for example when the JID is already contained in the client certificate), set authcid to that same JID.  See XEP-178 for mor details.
 
 
 ### XMPP.disconnect ()
@@ -272,7 +276,7 @@ Will be triggered when you receive a message.
 #### Parameters:
 
 * object.from: Who sent the message
-* object.type: Mostly "chat" ore "groupchat"
+* object.type: Mostly "chat" or "groupchat"
 * object.to: Who receives the message
 * object.body_text: The message text
 * object...
