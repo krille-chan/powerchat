@@ -63,9 +63,9 @@
   <div class="container">
       <h1 id="powerchat">POWERCHAT_!</h1>
 
-      <h4 id="easytousejavascriptobjectonlyxmpplibrarybasedonstrophejsstropheim">Easy to use xml-free javascript XMPP library based on <a href="/strophe.im">Strophe.js</a>.</h4>
+      <h4 id="easytousejavascriptobjectonlyxmpplibrarybasedonstrophejsstropheim">Json-only javascript XMPP solution based on <a href="/strophe.im">Strophe.js</a>.</h4>
 
-      <p>POWERCHAT_! is a simple to use XMPP library for webapps and messengers directly in the browser. With this library you are able to use the whole world of XMPP extensions without dealing with xml. POWERCHAT_! uses two functions, to convert xml to json and back. You only have to send and receive simple javascript objects.</p>
+      <p>POWERCHAT_! is a simple to use XMPP library for apps and messengers directly in the browser. With this library you are able to use the whole world of XMPP extensions without dealing with xml. POWERCHAT_! uses two functions, to convert xml to json and back. You only have to send and receive simple javascript objects.</p>
 
       <p>You can use bosh and websocket connections.</p>
 
@@ -83,91 +83,86 @@
 
       <p>Include powerchat.js and the latest strophe.min.js: (Get strophe.min.js from <a href="https://github.com/strophe/strophejs">here</a>)</p>
 
-      <pre><code>&lt;script src='strophe.min.js'&gt;&lt;/script&gt;
-      &lt;script src='powerchat.js'&gt;&lt;/script&gt;
+      <pre><code>
+  &lt;script src='strophe.min.js'&gt;&lt;/script&gt;
+  &lt;script src='powerchat.js'&gt;&lt;/script&gt;
       </code></pre>
 
       <h5 id="example1setthecallbacksformessagesandpresences">Example 1: Set the callbacks for messages and presences</h5>
 
-      <pre><code>XMPP.OnMessage = function ( message ) {
-          alert ( "New Message from " + message.from + ": " + message.body_text );
-      }
+      <pre><code>
+  XMPP.OnMessage = function ( message ) {
+      alert ( "New Message from " + message.from + ": " + message.body_text );
+  }
 
-      XMPP.OnConnectionStatus = console.info;
+  XMPP.OnConnectionStatus = console.info;
 
-      XMPP.OnPresence = console.log;
+  XMPP.OnPresence = console.log;
       </code></pre>
 
       <h5 id="example2connecttoyourserver">Example 2: Connect to your server:</h5>
 
       <p>You need to know the bosh or websocket address from your server.</p>
 
-      <pre><code>XMPP.connect ( {
-          connection: "wss://example.com/websocket",    // Your bosh / websocket connection
-          jid: "alice@example.com",
-          pass: "aliceLovesBob"
-      } );
+      <pre><code>
+  XMPP.connect ( {
+      connection: "wss://example.com/websocket",    // Your bosh / websocket connection
+      jid: "alice@example.com",
+      pass: "aliceLovesBob"
+  } );
 
-      ////// Console output will be:
-      // 1 "CONNECTING"
-      // 5 "CONNECTED"
+  ////// Console output will be:
+  // 1 "CONNECTING"
+  // 5 "CONNECTED"
       </code></pre>
 
       <p>XMPP.OnConnectionStatus will be triggered multiple times. When you are connected, you will receive messages and presences from your buddys.</p>
 
       <h5 id="example3sendmessage">Example 3: Send message</h5>
 
-      <pre><code>XMPP.send ( {
-          to: "bob@example.com",
-          body_text: "Hello, whats up?"
-      } );
+      <pre><code>
+  XMPP.send ( {
+      to: "bob@example.com",
+      body_text: "Hello, whats up?"
+  } );
       </code></pre>
 
       <h5 id="example4sendpresence">Example 4: Send presence</h5>
 
-      <pre><code>XMPP.sendPresence ( {
-          show_text: "xa"
-      } );
+      <pre><code>
+  XMPP.sendPresence ( {
+      show_text: "xa"
+  } );
       </code></pre>
 
       <p>With XMPP you can also manage a contact list called "roster". For this you should first add the namespace, described in the official <a href="https://xmpp.org/rfcs/rfc6121.html">XMPP documentation</a> and define two callback-functions.</p>
 
       <h5 id="example5requestroster">Example 5: Request roster</h5>
 
-      <pre><code>Strophe.addNamespace('ROSTER', 'jabber:iq:roster');
+      <pre><code>
+  Strophe.addNamespace('ROSTER', 'jabber:iq:roster');
 
-      success_callback = function ( roster ) {
-          alert ( "Roster received!" );
-          console.log ( roster );
-      };
+  success_callback = function ( roster ) {
+      alert ( "Roster received!" );
+      console.log ( roster );
+  };
 
-      error_callback = console.error;
+  error_callback = console.error;
 
-      XMPP.sendIQ ( { query_xmlns: Strophe.NS.ROSTER }, success_callback, error_callback );
+  XMPP.sendIQ ( { query_xmlns: Strophe.NS.ROSTER }, success_callback, error_callback );
       </code></pre>
 
-      <p>The roster will also be simple json. The xml result would be:</p>
+      <p>The result you will get in the success_callback function is simple this javascript object:</p>
 
-      <pre><code>&lt;iq id='bv1bs71f'
-             to='alice@example.com'
-             type='result'&gt;
-          &lt;query xmlns='jabber:iq:roster' ver='ver7'&gt;
-            &lt;item jid='nurse@example.com'/&gt;
-            &lt;item jid='romeo@example.net'/&gt;
-          &lt;/query&gt;
-        &lt;/iq&gt;
-      </code></pre>
-
-      <p>But the result you will get in the success_callback function is simple this:</p>
-
-      <pre><code>{
-          id: 'bv1bs71f',
-          to: 'alice@example.com',
-          type: 'result',
-          query_xmlns: 'jabber:iq:roster',
-          query_ver: 'ver7',
-          query_items: [ { jid: 'nurse@example.com' }, { jid: 'romeo@example.net' } ],
-      }
+      <pre><code>
+  {
+      id: 'bv1bs71f',
+      to: 'alice@example.com',
+      type: 'result',
+      query_xmlns: 'jabber:iq:roster',
+      query_ver: 'ver7',
+      query_items: [ { jid: 'nurse@example.com' }, { jid: 'romeo@example.net' } ],
+  }
       </code></pre>
 
       <p>You see that you have all informations from the basic XMPP stanza but it is allready converted into an javascript object.</p>
@@ -178,31 +173,38 @@
 
       <p>For example <a href="https://xmpp.org/extensions/xep-0085.html">XEP-0085: Chat State Notifications</a>:</p>
 
-      <pre><code>Strophe.addNamespace('CHATSTATE', 'http://jabber.org/protocol/chatstates');
+      <pre><code>
+  Strophe.addNamespace('CHATSTATE', 'http://jabber.org/protocol/chatstates');
 
-      XMPP.send ( {
-          to: "bob@example.com,
-          composing_xmlns: Strophe.NS.CHATSTATE
-      } );
+  XMPP.send ( {
+      to: "bob@example.com,
+      composing_xmlns: Strophe.NS.CHATSTATE
+  } );
       </code></pre>
 
       <h1 id="tryityourself">Try it yourself</h1>
 
       <h2>Simple client</h2>
-      <form id='connectForm' action='javascript:void(0);'>
+      <form id='connectForm' style='display: inline;' action='javascript:void(0);'>
           <input type="email" id="jid" placeholder="Jabber-ID">
           <input type="password" id="pass" placeholder="Password">
           <input type="text" id="service" placeholder="Bosh / WebSocket service">
+          <br/>
           <button>Connect</button>
       </form>
+          <button id="disconnect">Disconnect</button>
+          <input type="text" id="cstatus" value="(Connection status)" readonly>
       <div id="jsonStream"></div>
       <textarea id="jsonInput" placeholder="Input in javascript object (json) format"></textarea>
       <button id="sendMessage">Send message</button>
       <button id="sendPresence">Send presence</button>
       <button id="sendIQ">Send IQ</button>
-      <button id="disconnect">Disconnect</button>
 
       <script>
+
+        XMPP.OnConnectionStatus = function( n, status ) {
+            $("#cstatus").val( "" + n + ": " + status );
+        };
         XMPP.OnInput = function ( msg ) {
             $("#jsonStream").prepend(JsonHuman.format(msg));
                 $("#jsonStream").prepend("<h5>Incomming:</h5>");
@@ -380,16 +382,17 @@
 
       <p>A useful function to get a subnode. For example to transform:</p>
 
-      <pre><code>XMPP.getSubNode( {
-          carbon_forwarded_message_body_text: "...",
-          carbon_forwarded_message_from: "..."
-      },  "message");
+      <pre><code>
+  XMPP.getSubNode( {
+      carbon_forwarded_message_body_text: "...",
+      carbon_forwarded_message_from: "..."
+  },  "message");
 
-      // output:
-      // {
-      //  body_text: "...",
-      //  from: "..."
-      // }
+  // output:
+  // {
+  //  body_text: "...",
+  //  from: "..."
+  // }
       </code></pre>
 
       <h2 id="usefulvariables">Useful variables</h2>

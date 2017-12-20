@@ -29,6 +29,7 @@ XMPP = {
 
 	connect: function ( options ) {
 		if ( XMPP.conn == null ) {
+			XMPP._reconnect = null;
 			XMPP.conn = new Strophe.Connection( options.connection, options.options );
 			XMPP._initLinks ();
 			XMPP._initDebugStream();
@@ -46,8 +47,9 @@ XMPP = {
 
 
 	disconnect: function () {
-		XMPP.disconnect();
-		XMPP.reset();
+		XMPP.conn.xmlInput = XMPP.conn.xmlOutput = function() {};
+		XMPP.conn.disconnect();
+		XMPP.conn = null;
 	},
 
 
@@ -60,7 +62,7 @@ XMPP = {
 		if ( XMPP.OnConnectionStatus ) XMPP.OnConnectionStatus ( status, XMPP.status );
 		if ( status == 5 ) XMPP._onConnected ();
 		else if ( status == 6 && XMPP.OnDisconnected) XMPP.OnDisconnected ();
-		if ( status == 6 && XMPP._reconnect ) XMPP.connect ( XMPP._reconnect );
+		if ( status == 6 && XMPP._reconnect != null ) XMPP.connect ( XMPP._reconnect );
 	},
 
 
