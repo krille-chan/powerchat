@@ -346,11 +346,16 @@
       <li>messageObject.to: Who receives the message</li>
 
       <li>messageObject.body_text: The message text</li>
+
       </ul>
+
+        <p>Returns the message ID</p>
 
       <h3 id="xmppsendpresencepresenceobject">XMPP.sendPresence ( presenceObject )</h3>
 
       <p>Will send a presence. All parameters are optional. To send an certain presence, set show_text.</p>
+
+      <p>Returns the presence ID</p>
 
       <h3 id="xmppsendiqiqsuccess_callbackerror_callbacktimeout">XMPP.sendIQ ( iq, success<em>callback, error</em>callback, timeout )</h3>
 
@@ -367,6 +372,8 @@
 
       <li>(int) timeout: The time for timeout. By default this is the value in XMPP.timeout, initialized with 5000.</li>
       </ul>
+
+      <p>Returns the IQ ID</p>
 
       <h3 id="xmppsetdebugdebugon">XMPP.setDebug ( debugOn )</h3>
 

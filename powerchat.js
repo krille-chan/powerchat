@@ -86,6 +86,7 @@ XMPP = {
 			if ( !jsobject.type ) jsobject.type = "chat";
 			var stanza = XMPP._jsonToStanza ( jsobject, "message" );
 			XMPP.conn.send ( stanza );
+			return jsobject.id;
 		}
 		catch( e ) {
 			Strophe.error(e);
@@ -97,7 +98,7 @@ XMPP = {
 		try {
 			if ( !jsobject.xmlns ) jsobject.xmlns = "jabber:client";
 			var stanza = XMPP._jsonToStanza ( jsobject, "presence" );
-			XMPP.conn.sendPresence ( stanza );
+			return XMPP.conn.sendPresence ( stanza );
 		}
 		catch( e ) {
 			Strophe.error(e);
@@ -112,7 +113,7 @@ XMPP = {
 			if ( !jsobject.id ) jsobject.id = XMPP.conn.getUniqueId ();
 			if ( !jsobject.type ) jsobject.type = "get";
 			var stanza = XMPP._jsonToStanza ( jsobject, "iq" );
-			XMPP.conn.sendIQ ( stanza, function ( answer ) {
+			return XMPP.conn.sendIQ ( stanza, function ( answer ) {
 				try {
 					if ( success_callback ) success_callback ( XMPP._stanzaToJson ( answer ) );
 				}
