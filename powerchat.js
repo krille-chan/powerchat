@@ -155,7 +155,7 @@ XMPP = {
 	getSubNode: function ( jsobject, nodeName ) {
 		var stanza = XMPP._jsonToStanza ( jsobject );
 		var subNode = stanza.querySelector ( nodeName );
-		return XMPP._stanzaToJson ( subnode );
+		return XMPP._stanzaToJson ( subNode );
 	},
 
 
